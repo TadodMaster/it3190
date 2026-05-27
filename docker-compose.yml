@@ -1,0 +1,20 @@
+# Run the IT3190 notebooks in Jupyter:
+#
+#   docker compose up --build
+#
+# then open http://localhost:8888  (no token/password required).
+#
+# The two course folders are bind-mounted, so edits made in JupyterLab are written
+# straight back to your working copy on the host.
+
+services:
+  jupyter:
+    build: .
+    image: it3190-jupyter
+    container_name: it3190-jupyter
+    ports:
+      # Bound to localhost only so the auth-less server is not exposed on the network.
+      - "127.0.0.1:8888:8888"
+    volumes:
+      - ./preprocessing:/workspace/preprocessing
+      - ./regression:/workspace/regression

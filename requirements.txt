@@ -1,0 +1,23 @@
+# Python dependencies for running the IT3190 notebooks under Jupyter.
+#
+# scikit-learn is pinned to 1.1.3 ON PURPOSE: regression/homework/regression_homework.ipynb
+# calls sklearn.datasets.load_boston(), which was removed in scikit-learn 1.2. Because
+# scikit-learn 1.1.3 is built against the numpy 1.x ABI, the rest of the numeric stack is
+# kept on numpy<2 to stay compatible.
+
+numpy==1.26.4
+scipy==1.11.4
+scikit-learn==1.1.3
+pandas==2.1.4
+matplotlib==3.8.4
+seaborn==0.13.2
+
+# Vietnamese tokenizer used by preprocessing_news.ipynb (pyvi.ViTokenizer).
+# pyvi unpickles a CRF model at import time that needs the sklearn-crfsuite module, so it
+# must be installed even though pyvi itself is installed with --no-deps in the Dockerfile
+# (--no-deps keeps pyvi from upgrading the pinned scikit-learn above). sklearn-crfsuite
+# pulls python-crfsuite + six + tabulate + tqdm and does NOT pin scikit-learn.
+sklearn-crfsuite
+
+# Notebook UI.
+jupyterlab==4.2.5

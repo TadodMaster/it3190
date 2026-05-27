@@ -1,0 +1,7 @@
+# The notebooks and data are bind-mounted at runtime, not copied into the image,
+# so keep them (and git metadata) out of the build context to keep builds fast.
+.git
+preprocessing/
+regression/
+**/.ipynb_checkpoints/
+**/__pycache__/
