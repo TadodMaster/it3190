@@ -18,6 +18,8 @@ in English.
 | **Final project** | `project/` | DKA-AKI risk prediction on MIMIC-IV — preprocessing + Random Forest, with predictions on a held-out test set |
 | **Preprocessing labs** | `preprocessing/` | Tabular data cleaning (Bangalore house prices) and Vietnamese text TF-IDF (VNExpress news) |
 | **Regression labs** | `regression/` | Linear & Ridge regression practices + a from-scratch linear regression homework |
+| **Clustering labs** | `kmeans/` | K-means with scikit-learn + image compression, and a from-scratch K-means homework |
+| **Classification labs** | `knn/` | K-Nearest Neighbors on the German credit dataset (k / feature / distance-metric selection) |
 | **Environment** | `Dockerfile`, `docker-compose.yml`, `requirements.txt` | Pinned scientific stack + JupyterLab |
 
 ---
@@ -78,9 +80,21 @@ project/
 - `homework/` — Boston housing: a **from-scratch** linear regression (normal
   equation) compared against scikit-learn's implementation.
 
-> These notebooks were originally written for Google Colab and have been
-> localized to run locally (Google Drive mounts and `!pip install` cells removed,
-> data paths made relative).
+### Clustering — K-means (`kmeans/`)
+- `practice/kmeans.ipynb` — K-means with scikit-learn on synthetic blobs, then
+  **image compression** of `bird_small.png` (clustering pixel colours).
+- `homework/kmeans_homework.ipynb` — a **from-scratch** `MyKMeans` (k-means++
+  init, assignment/update loop, inertia), validated against scikit-learn on both
+  the blobs and the image-compression task.
+
+### Classification — KNN (`knn/`)
+- `practice/KNN_credit_risk.ipynb` — K-Nearest Neighbors on the Statlog German
+  credit dataset with a cost-sensitive evaluation, plus model-selection
+  exercises: number of neighbours `k`, feature selection, and distance metric.
+
+> The preprocessing, regression and K-means notebooks were originally written for
+> Google Colab and have been localized to run locally (Google Drive mounts and
+> `!pip install` cells removed, data paths made relative).
 
 ---
 
@@ -103,7 +117,8 @@ straight back to your working copy.
 Pinned in `requirements.txt`. Notably **`scikit-learn==1.1.3`** (and `numpy<2`,
 Python 3.11) — required because `regression_homework.ipynb` uses
 `datasets.load_boston()`, removed in scikit-learn 1.2. The Vietnamese tokenizer
-`pyvi` is installed with its `sklearn-crfsuite` dependency.
+`pyvi` is installed with its `sklearn-crfsuite` dependency, and `scikit-image`
+provides the image I/O used by the K-means compression notebooks.
 
 ---
 
@@ -113,6 +128,8 @@ Python 3.11) — required because `regression_homework.ipynb` uses
 it3190/
 ├── preprocessing/   data cleaning + text TF-IDF labs
 ├── regression/      linear & ridge regression labs + homework
+├── kmeans/          K-means clustering + image compression (practice + homework)
+├── knn/             K-Nearest Neighbors classification (credit risk)
 ├── project/         final project: DKA-AKI prediction (MIMIC-IV)
 ├── Dockerfile       Python 3.11 + JupyterLab image
 ├── docker-compose.yml
