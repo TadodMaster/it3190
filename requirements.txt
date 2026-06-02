@@ -12,6 +12,11 @@ pandas==2.1.4
 matplotlib==3.8.4
 seaborn==0.13.2
 
+# Image I/O for the K-means image-compression notebooks (skimage.io.imread of bird_small.png).
+# Left unpinned so pip resolves a version compatible with the pinned numpy==1.26.4; it pulls
+# imageio + Pillow (the PNG backend) transitively.
+scikit-image
+
 # Vietnamese tokenizer used by preprocessing_news.ipynb (pyvi.ViTokenizer).
 # pyvi unpickles a CRF model at import time that needs the sklearn-crfsuite module, so it
 # must be installed even though pyvi itself is installed with --no-deps in the Dockerfile

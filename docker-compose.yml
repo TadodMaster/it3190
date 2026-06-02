@@ -18,4 +18,6 @@ services:
     volumes:
       - ./preprocessing:/workspace/preprocessing
       - ./regression:/workspace/regression
+      - ./kmeans:/workspace/kmeans
+      - ./knn:/workspace/knn
       - ./project:/workspace/project
