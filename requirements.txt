@@ -24,5 +24,10 @@ scikit-image
 # pulls python-crfsuite + six + tabulate + tqdm and does NOT pin scikit-learn.
 sklearn-crfsuite
 
+# Gradient-boosted trees for project/src/modeling_xgboost.ipynb (the best model in the
+# DKA-AKI paper, fpubh-11-1087297). 2.1.x ships manylinux wheels built against numpy 1.x,
+# so it stays compatible with the pinned numpy==1.26.4 / Python 3.11 stack above.
+xgboost==2.1.4
+
 # Notebook UI.
 jupyterlab==4.2.5
