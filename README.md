@@ -15,7 +15,7 @@ in English.
 
 | Area | Folder | What's inside |
 |---|---|---|
-| **Final project** | `project/` | DKA-AKI risk prediction on MIMIC-IV — preprocessing + Random Forest, with predictions on a held-out test set |
+| **Final project** | `project/` | DKA-AKI risk prediction on MIMIC-IV — preprocessing + two models (Random Forest, XGBoost), with predictions on a held-out test set |
 | **Preprocessing labs** | `preprocessing/` | Tabular data cleaning (Bangalore house prices) and Vietnamese text TF-IDF (VNExpress news) |
 | **Regression labs** | `regression/` | Linear & Ridge regression practices + a from-scratch linear regression homework |
 | **Clustering labs** | `kmeans/` | K-means with scikit-learn + image compression, and a from-scratch K-means homework |
@@ -42,24 +42,35 @@ MIMIC-IV data, following:
   1. `src/preprocessing.ipynb` — flatten each patient to one row (dynamic series
      aggregated with **min/mean/max**), KNN-impute, encode categoricals, scale →
      writes `data/train_processed.csv` and `data/preprocessor.joblib`.
-  2. `src/modeling_randomforest.ipynb` — train Random Forest with a stratified
-     split, **GridSearchCV tuning** and **decision-threshold tuning**, then apply
-     the saved preprocessor to `test.json` → writes
+  2. `src/modeling_randomforest.ipynb` (**v1 baseline**) — train Random Forest with
+     a stratified 80/20 split, **GridSearchCV tuning** and **decision-threshold
+     tuning**, then apply the saved preprocessor to `test.json` → writes
      `output/test_predictions_randomforest.csv`.
-- **Docs** (`project/docs/`): the source paper PDF and `data_dictionary.md`
-  (every field explained, static vs. dynamic, and the rationale for the
-  time-series aggregation choice).
+  3. `src/modeling_xgboost.ipynb` (**v2 — the paper's best model**) — same
+     preprocessing and the *same* 80/20 split, swapping in **XGBoost** →
+     writes `output/test_predictions_xgboost.csv`. Held-out validation
+     **AUC ≈ 0.817**, beating the RF baseline (0.806).
+- **Docs** (`project/docs/`): the source paper PDF, `data_dictionary.md` (every
+  field explained, static vs. dynamic, and the rationale for the time-series
+  aggregation choice), per-version model checkpoints
+  (`model_v1_checkpoint.md`, `model_v2_checkpoint.md`), an RF hyperparameter-tuning
+  guide, and the written report(s).
+- **Experiment logs** (`project/output/`): `rf_experiment_log.md` / `.csv` and
+  `rf_grid_search_all.csv` capture the Random Forest tuning runs.
 
 ```
 project/
 ├── data/      train.json, test.json  (+ generated: train_processed.csv, preprocessor.joblib)
-├── docs/       fpubh-11-1087297.pdf, data_dictionary.md
-├── src/        preprocessing.ipynb, modeling_randomforest.ipynb
-└── output/     test_predictions_randomforest.csv, randomforest_model.joblib
+├── docs/       fpubh-11-1087297.pdf, data_dictionary.md, model_v1/v2_checkpoint.md,
+│               hyperparameter_tuning_randomforest.md, report_v1_randomforest.{docx,pdf}, ...
+├── src/        preprocessing.ipynb, modeling_randomforest.ipynb, modeling_xgboost.ipynb
+└── output/     test_predictions_{randomforest,xgboost}.csv, {randomforest,xgboost}_model.joblib,
+                rf_experiment_log.{md,csv}, rf_grid_search_all.csv
 ```
 
 **Run order:** `preprocessing.ipynb` first (creates the processed CSV and the
-`preprocessor.joblib`), then `modeling_randomforest.ipynb`.
+`preprocessor.joblib`), then either modeling notebook
+(`modeling_randomforest.ipynb` and/or `modeling_xgboost.ipynb`).
 
 ---
 
@@ -118,7 +129,9 @@ Pinned in `requirements.txt`. Notably **`scikit-learn==1.1.3`** (and `numpy<2`,
 Python 3.11) — required because `regression_homework.ipynb` uses
 `datasets.load_boston()`, removed in scikit-learn 1.2. The Vietnamese tokenizer
 `pyvi` is installed with its `sklearn-crfsuite` dependency, and `scikit-image`
-provides the image I/O used by the K-means compression notebooks.
+provides the image I/O used by the K-means compression notebooks. **`xgboost==2.1.4`**
+is included for the final project's v2 model (`modeling_xgboost.ipynb`) — rebuild the
+image after pulling so it is available: `docker compose up -d --build`.
 
 ---
 
