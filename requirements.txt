@@ -31,3 +31,4 @@ xgboost==2.1.4
 
 # Notebook UI.
 jupyterlab==4.2.5
+imblearn
