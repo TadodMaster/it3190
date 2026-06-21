@@ -1,5 +1,5 @@
 timestamp,experiment,changed_vs_baseline,n_estimators,max_depth,min_samples_split,min_samples_leaf,max_features,bootstrap,class_weight,threshold,cv_auc_mean,cv_auc_std,val_AUC,val_Accuracy,val_Sensitivity,val_Specificity,val_F1,notes
-2026-06-16 15:08:04,Baseline (cấu hình hiện tại — mục 4),(mốc tham chiếu),300,,2,2,sqrt,True,balanced,0.5,0.8042,0.0438,0.8065,0.7526,0.6667,0.8067,0.6757,Cấu hình đang dùng trong notebook trước khi tinh chỉnh.
-2026-06-16 15:53:03,GridSearch — cấu hình tốt nhất,n_estimators: 300 → 500; max_features: sqrt → log2,500,,2,2,log2,True,balanced,0.5,0.8109,0.0445,0.8069,0.7577,0.6667,0.8151,0.6803,Tốt nhất trong 1080 tổ hợp theo CV ROC-AUC.
-2026-06-16 15:53:03,Best RF + ngưỡng tối đa F1 (0.470),ngưỡng 0.5 → 0.470,500,,2,2,log2,True,balanced,0.47,0.8109,0.0445,0.8069,0.7629,0.7067,0.7983,0.6974,"Cùng mô hình tốt nhất, chỉ thay đổi ngưỡng quyết định."
-2026-06-16 15:53:03,Best RF + ngưỡng Sens>=0.85 (0.330),ngưỡng 0.5 → 0.330,500,,2,2,log2,True,balanced,0.33,0.8109,0.0445,0.8069,0.6701,0.8533,0.5546,0.6667,"Cùng mô hình tốt nhất, chỉ thay đổi ngưỡng quyết định."
+2026-06-20 18:44:27,Baseline (cấu hình hiện tại — mục 4),(mốc tham chiếu),300,,2,2,sqrt,True,balanced,0.5,0.8042,0.0438,0.8065,0.7526,0.6667,0.8067,0.6757,Cấu hình đang dùng trong notebook trước khi tinh chỉnh.
+2026-06-20 19:26:56,GridSearch — cấu hình tốt nhất,n_estimators: 300 → 500; max_features: sqrt → log2,500,,2,2,log2,True,balanced,0.5,0.8109,0.0445,0.8069,0.7577,0.6667,0.8151,0.6803,Tốt nhất trong 1080 tổ hợp theo CV ROC-AUC.
+2026-06-20 19:26:56,Best RF + ngưỡng tối đa F1 (0.470),ngưỡng 0.5 → 0.470,500,,2,2,log2,True,balanced,0.47,0.8109,0.0445,0.8069,0.7629,0.7067,0.7983,0.6974,"Cùng mô hình tốt nhất, chỉ thay đổi ngưỡng quyết định."
+2026-06-20 19:26:56,Best RF + ngưỡng Sens>=0.85 (0.330),ngưỡng 0.5 → 0.330,500,,2,2,log2,True,balanced,0.33,0.8109,0.0445,0.8069,0.6701,0.8533,0.5546,0.6667,"Cùng mô hình tốt nhất, chỉ thay đổi ngưỡng quyết định."
